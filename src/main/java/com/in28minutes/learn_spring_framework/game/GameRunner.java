@@ -1,10 +1,11 @@
 package com.in28minutes.learn_spring_framework.game;
 
+//이제 GameRunner는 추상적인 GamingConsole인터페이스에 의존한다.
 public class GameRunner {
-    private SuperContraGame game;
+    private GamingConsole game;
 
-    public GameRunner(SuperContraGame superContraGame) {
-        this.game = superContraGame;
+    public GameRunner(GamingConsole game) {
+        this.game = game;
     }
 
     public void run(){
