@@ -34,7 +34,7 @@ public class HelloWorldConfiguration {
         return person;
     }
 
-    @Bean
+    @Bean(name = "address2")//이렇게 스프링 빈의 이름을 바꿀 수 있다고 한다.
     public Address address() {
         return new Address("강남구", "서울");
     }
