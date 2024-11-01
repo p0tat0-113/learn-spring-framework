@@ -14,5 +14,8 @@ public class App02HelloWorldSpring {
 
         //3. Spring이 관리하는 Bean을 검색
         System.out.println(context.getBean("name"));//빈을 꺼내온다. 빈을 꺼내오는 방법으로는 여러가지가 있지만 여기에서는 빈의 이름을 이용함.
+        System.out.println(context.getBean("age"));
+        System.out.println(context.getBean("person"));
+        System.out.println(context.getBean("address"));
     }
 }
