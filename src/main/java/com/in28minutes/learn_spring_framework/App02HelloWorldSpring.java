@@ -16,6 +16,9 @@ public class App02HelloWorldSpring {
         System.out.println(context.getBean("name"));//빈을 꺼내온다. 빈을 꺼내오는 방법으로는 여러가지가 있지만 여기에서는 빈의 이름을 이용함.
         System.out.println(context.getBean("age"));
         System.out.println(context.getBean("person"));
-        System.out.println(context.getBean("address"));
+        System.out.println(context.getBean("person2MethodCall"));
+        System.out.println(context.getBean("person3Parameters"));
+        System.out.println(context.getBean("address2"));
+        //System.out.println(context.getBean(Address.class));//이름 대신 클래스 정보를 이용해서 Bean을 검색할 수 있다. 현재 Address타입 빈이 2개가 등록되어 있어서 예외가 발생함.
     }
 }
