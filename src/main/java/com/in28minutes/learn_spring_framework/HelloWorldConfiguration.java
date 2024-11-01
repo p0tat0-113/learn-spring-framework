@@ -54,6 +54,18 @@ public class HelloWorldConfiguration {
     }
 
     //2. 이번에는 매개변수를 사용, 스프링에 등록된 빈들을 가져와서 연결시킨다.
+    /*스프링은 @Configuration 클래스 내의 @Bean 메서드에 정의된 매개변수를 통해 의존성을 자동으로 주입할 수 있습니다. 이를 **메서드 파라미터 주입(Method Parameter Injection)**이라고 합니다. 이 방식은 타입 기반(Type-based) 및 **이름 기반(Name-based)**으로 의존성을 해결합니다.
+
+    동작 방식:
+    빈 생성 시 의존성 주입:
+    스프링은 @Bean 메서드를 호출할 때, 해당 메서드의 매개변수에 필요한 빈을 자동으로 주입합니다.
+    이 주입은 스프링 컨테이너에 이미 등록된 빈을 사용하여 이루어집니다.
+
+    의존성 해결:
+    스프링은 매개변수의 타입과 이름을 기준으로 적절한 빈을 찾아 주입합니다.
+    타입 일치: 먼저, 매개변수의 타입과 일치하는 빈을 찾습니다.
+    이름 일치: 타입이 일치하는 빈이 여러 개일 경우, 매개변수 이름과 빈의 이름이 일치하는 빈을 우선적으로 선택합니다.*/
+
     @Bean
     public Person person3Parameters(String name, int age, Address address3) {//name, age, address3 <- 빈의 이름이 address3이기 때문에 address3를 사용. 매개변수들의 이름은 스프링에 등록된 Bean의 이름과 같아야 한다.
         return new Person(name, age, address3); //<- 이 경우에는 기존에 스프링에 등록되어 있던 Address빈을 가져다 쓰게 된다. 스프링에서 관리하는 기존 빈을 재활용
