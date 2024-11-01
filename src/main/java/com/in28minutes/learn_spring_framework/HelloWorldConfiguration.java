@@ -1,7 +1,9 @@
 package com.in28minutes.learn_spring_framework;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 /*record는 JDK 16에서 도입된 새로운 클래스 형태로, 불변(immutable) 데이터 객체를 간결하게 정의할 수 있게 해줍니다.
 record는 주로 데이터를 담기 위한 객체를 만들 때 사용되며, 자동으로 생성되는 메서드들 덕분에 코드의 간결성과 가독성을 크게 향상시킵니다.
@@ -71,12 +73,26 @@ public class HelloWorldConfiguration {
         return new Person(name, age, address3); //<- 이 경우에는 기존에 스프링에 등록되어 있던 Address빈을 가져다 쓰게 된다. 스프링에서 관리하는 기존 빈을 재활용
     }
 
+    @Bean
+    @Primary
+    public Person person4Parameters(String name, int age, Address address) {//address라는 이름을 가진 빈은 없다. 이대로 실행하면 예외가 발생함. 일치하는 후보가 여러개인 상태인 상태에서 스프링은 예외를 낸다. available: expected single matching bean but found 2: address2,address3
+        //이럴때 특정 빈을 사용하도록 우선순위를 정해줄 수가 있다.
+        return new Person(name, age, address);
+    }
+
+    @Bean
+    public Person person5Qualifier(String name, int age, @Qualifier("address3Qualifier") Address address) {//@Primary말고도 @Qualifier()를 사용해서 자동연결된 스프링 빈을 설정할 수도 있다.
+        return new Person(name, age, address);
+    }
+
     @Bean(name = "address2")//이렇게 스프링 빈의 이름을 바꿀 수 있다고 한다.
+    @Primary//후보가 여러명 일 때 이 스프링 빈을 사용하도록 우선순위를 정해주었다.
     public Address address() {
         return new Address("강남구", "서울");
     }
 
     @Bean(name = "address3")//이렇게 스프링 빈의 이름을 바꿀 수 있다고 한다.
+    @Qualifier("address3Qualifier")//한정자, AutoWiring될 때 스프링 빈의 이름대신 이것을 사용할 수 있다.
     public Address address3() {
         return new Address("구로구", "서울");
     }

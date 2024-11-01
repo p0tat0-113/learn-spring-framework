@@ -2,6 +2,8 @@ package com.in28minutes.learn_spring_framework;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.Arrays;
+
 public class App02HelloWorldSpring {
     public static void main(String[] args) {
         //1. SpringContext를 실행
@@ -18,7 +20,14 @@ public class App02HelloWorldSpring {
         System.out.println(context.getBean("person"));
         System.out.println(context.getBean("person2MethodCall"));
         System.out.println(context.getBean("person3Parameters"));
+        System.out.println(context.getBean("person4Parameters"));
+        System.out.println(context.getBean("person5Qualifier"));
         System.out.println(context.getBean("address2"));
-        //System.out.println(context.getBean(Address.class));//이름 대신 클래스 정보를 이용해서 Bean을 검색할 수 있다. 현재 Address타입 빈이 2개가 등록되어 있어서 예외가 발생함.
+
+        System.out.println(context.getBean(Address.class));//이름 대신 클래스 정보를 이용해서 Bean을 검색할 수 있다. 현재 Address타입 빈이 2개가 등록되어 있어서 예외가 발생함. 이제 address2 스프링 빈을 기본으로 사용하도록 @Primary를 붙여서 잘 작동함.
+        System.out.println(context.getBean(Person.class));
+
+        //SpringContatiner에 등록된 모든 SpringBean들을 나열해보자. Configuration파일과 그 안에서 정의한 스프링 빈들의 이름이 출력된다.
+        Arrays.stream(context.getBeanDefinitionNames()).forEach(System.out::println);//함수형 프로그래밍, 메서드 참조, getBeanDefinitionNames()은 String배열을 반환한다.
     }
 }
