@@ -1,6 +1,8 @@
 package com.in28minutes.learn_spring_framework.game;
 
-//이제 GameRunner는 추상적인 GamingConsole인터페이스에 의존한다.
+import org.springframework.stereotype.Component;
+
+@Component//@Component애노테이션 추가, 스프링이 자동으로 인스턴스를 생성해줌. 설정파일에서 @Bean메서드를 정의할 필요 없음.
 public class GameRunner {
     private GamingConsole game;
 
