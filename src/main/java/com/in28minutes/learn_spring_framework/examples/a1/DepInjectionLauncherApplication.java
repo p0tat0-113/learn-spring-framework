@@ -12,11 +12,20 @@ import java.util.Arrays;
 //생성자 주입 예제를 위한 내부클래스들
 @Component
 class YourBusinessClass {
-    //필드를 통한 의존성 주입. 별도의 생성자나 setter가 없음. 리플렉션을 통해서 의존성이 주입된다.
-    @Autowired//@Autowired를 붙여야 Spring이 자동으로 의존성을 주입해준다. 처음에는 @AutoWired를 붙이지 않아서 null이 출력됐었음.
     Dependency1 dependency1;
-    @Autowired
     Dependency1 dependency2;
+
+    //setter를 통한 의존성 주입. setter메서드 앞에 @AutoWired를 붙여주면 된다.
+    @Autowired
+    public void setDependency1(Dependency1 dependency1) {
+        System.out.println("Setter Injection - setDependency1");
+        this.dependency1 = dependency1;
+    }
+    @Autowired
+    public void setDependency2(Dependency1 dependency2) {
+        System.out.println("Setter Injection - setDependency2");
+        this.dependency2 = dependency2;
+    }
 
     @Override
     public String toString() {
