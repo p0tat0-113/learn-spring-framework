@@ -15,7 +15,15 @@ class YourBusinessClass {
     Dependency1 dependency1;
     Dependency1 dependency2;
 
-    //setter를 통한 의존성 주입. setter메서드 앞에 @AutoWired를 붙여주면 된다.
+    //@AutoWired //생성자 주입은 @AutoWired를 꼭 붙이지 않아도 된다. 스프링이 자동으로 생성자를 통해 의존성을 주입한다. 앞에서 별도의 Configuration파일을 만들어서 기존의 스프링 빈을 이용해 새로운 스프링 빈을 만들때 이런 방법을 사용했음.
+    //스프링에서는 생성자 주입을 권장한다고 한다. 모든 의존성 주입이 하나의 메서드에서 일어나기 때문.
+    public YourBusinessClass(Dependency1 dependency1, Dependency1 dependency2) {
+        System.out.println("Constructor Injection - YourBusinessClass");
+        this.dependency1 = dependency1;
+        this.dependency2 = dependency2;
+    }
+
+    /*//setter를 통한 의존성 주입. setter메서드 앞에 @AutoWired를 붙여주면 된다.
     @Autowired
     public void setDependency1(Dependency1 dependency1) {
         System.out.println("Setter Injection - setDependency1");
@@ -25,7 +33,7 @@ class YourBusinessClass {
     public void setDependency2(Dependency1 dependency2) {
         System.out.println("Setter Injection - setDependency2");
         this.dependency2 = dependency2;
-    }
+    }*/
 
     @Override
     public String toString() {
